@@ -42,15 +42,10 @@
                     var toUrl = '<a target="_blank" href="' + strBaseToUrl + address + '">Me to There</a>';
                     var fromUrl = '<a target="_blank" href="' + strBaseUrl + address + strMyLocForEnd + '">There to Me</a>';
                     var strSubjectAddressForEmail = address;
-                    
-                    for (var i = 0; i < 50; i++) {
-                        strSubjectAddressForEmail = strSubjectAddressForEmail.replace(" ", "%20");
-                    };
+                    strSubjectAddressForEmail = strSubjectAddressForEmail.replace((/ /g, "%20");
                     var strBodyAddressForEmail = address;
+                    strBodyAddressForEmail = strBodyAddressForEmail.replace((/ /g, "+");
                     
-                    for (var i = 0; i < 50; i++) {
-                        strBodyAddressForEmail = strBodyAddressForEmail.replace(" ", "+");
-                    };
                     var emailFromUrl = '<a target="_blank" href="mailto:A%20Friend?Subject=How%20to%20get%20to%20' + strSubjectAddressForEmail + '%20from%20me&body=<' + strBaseUrl + strBodyAddressForEmail + strMyLocForEnd + '>">A Friend</a>';
                     var emailToUrl = '<a target="_blank" href="mailto:A%20Friend?Subject=How%20to%20get%20from%20' + strSubjectAddressForEmail + '%20to%20me&body=<' + strBaseToUrl + strBodyAddressForEmail + '>">A Friend</a>';
                     var rowNode = table
@@ -85,15 +80,10 @@
                 var toUrl = '<a target="_blank" href="' + strBaseToUrl + address + '">Me to There</a>';
                 var fromUrl = '<a target="_blank" href="' + strBaseUrl + address + strMyLocForEnd + '">There to Me</a>';
                 var strSubjectAddressForEmail = address;
-                
-                for (var i = 0; i < 50; i++) {
-                    strSubjectAddressForEmail = strSubjectAddressForEmail.replace(" ", "%20");
-                };
-                var strBodyAddressForEmail = address;
-
-                for (var i = 0; i < 50; i++) {
-                    strBodyAddressForEmail = strBodyAddressForEmail.replace(" ", "+");
-                };
+                    strSubjectAddressForEmail = strSubjectAddressForEmail.replace((/ /g, "%20");
+                    var strBodyAddressForEmail = address;
+                    strBodyAddressForEmail = strBodyAddressForEmail.replace((/ /g, "+");
+                    
                 var emailFromUrl = '<a target="_blank" href="mailto:A%20Friend?Subject=How%20to%20get%20to%20' + strSubjectAddressForEmail + '%20from%20me&body=<' + strBaseUrl + strBodyAddressForEmail + strMyLocForEnd + '>">A Friend</a>';
                 var emailToUrl = '<a target="_blank" href="mailto:A%20Friend?Subject=How%20to%20get%20from%20' + strSubjectAddressForEmail + '%20to%20me&body=<' + strBaseToUrl + strBodyAddressForEmail + '>">A Friend</a>';
                 var rowNode = table
