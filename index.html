@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    
+    <title>There to me</title>
+    <script src='js/jquery.js'></script>
+    <script src='js/jquery.browser.js'></script>
+    <script src="js/jquery.prettyLoader.js"></script>
+    <script src='DataTables-1.10.1/media/js/jquery.dataTables.js'></script>
+    <script src="DataTables-1.10.1/extensions/ColVis/js/dataTables.colVis.js"></script>
+    <script src="DataTables-1.10.1/extensions/TableTools/js/dataTables.tableTools.js"></script>
+    <script src="DataTables-1.10.1/extensions/Responsive/js/dataTables.responsive.js"></script>
+    <script src="DataTables-1.10.1/extensions/FixedColumns/js/dataTables.fixedColumns.js"></script>
+    <link rel="stylesheet" type="text/css" href="DataTables-1.10.1/media/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="DataTables-1.10.1/extensions/ColVis/css/dataTables.colVis.css">
+    <link rel="stylesheet" type="text/css" href="DataTables-1.10.1/extensions/TableTools/css/dataTables.tableTools.css">
+    <link rel="stylesheet" type="text/css" href="DataTables-1.10.1/extensions/Responsive/css/dataTables.responsive.css">
+    <link rel="stylesheet" type="text/css" href="DataTables-1.10.1/extensions/FixedColumns/css/dataTables.fixedColumns.css">
+    <link rel="stylesheet" type="text/css" href="css/pretty.css">
+    <script>
+        var strBaseToUrl = 'https://www.google.com/maps/dir/Current+Location/';
+        var strBaseUrl = 'https://www.google.com/maps/dir/';
+        var strMyLocForEnd = "/Current+Location";
+        
+
+        $('document').ready(function () {
+            $('#addressTable').DataTable();
+            if (typeof (Storage) !== "undefined") {
+                // Code for localStorage/sessionStorage.
+            } else {
+                // Sorry! No Web Storage support..
+            };
+            var loadAddresses = localStorage.addresses;
+            console.log(loadAddresses);
+            var strAddressLoadString = "";
+            //var check = loadAddresses.length;
+			if(typeof(loadAddresses) != 'undefined'){
+            for (var j = 0; j <= loadAddresses.length; j++) {
+                if (loadAddresses[j] == "~" ) {
+                    var table = $('#addressTable').DataTable();
+                    var address = strAddressLoadString;
+                    var toUrl = '<a target="_blank" href="' + strBaseToUrl + address + '">Me to There</a>';
+                    var fromUrl = '<a target="_blank" href="' + strBaseUrl + address + strMyLocForEnd + '">There to Me</a>';
+                    var strSubjectAddressForEmail = address;
+                    
+                    for (var i = 0; i < 50; i++) {
+                        strSubjectAddressForEmail = strSubjectAddressForEmail.replace(" ", "%20");
+                    };
+                    var strBodyAddressForEmail = address;
+                    
+                    for (var i = 0; i < 50; i++) {
+                        strBodyAddressForEmail = strBodyAddressForEmail.replace(" ", "+");
+                    };
+                    var emailFromUrl = '<a target="_blank" href="mailto:A%20Friend?Subject=How%20to%20get%20to%20' + strSubjectAddressForEmail + '%20from%20me&body=<' + strBaseUrl + strBodyAddressForEmail + strMyLocForEnd + '>">A Friend</a>';
+                    var emailToUrl = '<a target="_blank" href="mailto:A%20Friend?Subject=How%20to%20get%20from%20' + strSubjectAddressForEmail + '%20to%20me&body=<' + strBaseToUrl + strBodyAddressForEmail + '>">A Friend</a>';
+                    var rowNode = table
+                        .row.add([address, fromUrl, toUrl, emailFromUrl, emailToUrl])
+                        .draw()
+                        .node();
+                    strAddressLoadString = "";
+
+                }
+                else {
+                    strAddressLoadString = strAddressLoadString + loadAddresses[j];
+                    
+                };
+
+            };
+			};
+            $('#clear').click(function () {
+                localStorage.removeItem('addresses');
+                var table = $('#addressTable').DataTable();
+                table
+                .clear()
+                .draw();
+            });
+            $('#email').click(function () {
+
+            });
+
+
+            $('#addAddress').click(function () {
+                var table = $('#addressTable').DataTable();
+                var address = $('#theAddress').val();
+                var toUrl = '<a target="_blank" href="' + strBaseToUrl + address + '">Me to There</a>';
+                var fromUrl = '<a target="_blank" href="' + strBaseUrl + address + strMyLocForEnd + '">There to Me</a>';
+                var strSubjectAddressForEmail = address;
+                
+                for (var i = 0; i < 50; i++) {
+                    strSubjectAddressForEmail = strSubjectAddressForEmail.replace(" ", "%20");
+                };
+                var strBodyAddressForEmail = address;
+
+                for (var i = 0; i < 50; i++) {
+                    strBodyAddressForEmail = strBodyAddressForEmail.replace(" ", "+");
+                };
+                var emailFromUrl = '<a target="_blank" href="mailto:A%20Friend?Subject=How%20to%20get%20to%20' + strSubjectAddressForEmail + '%20from%20me&body=<' + strBaseUrl + strBodyAddressForEmail + strMyLocForEnd + '>">A Friend</a>';
+                var emailToUrl = '<a target="_blank" href="mailto:A%20Friend?Subject=How%20to%20get%20from%20' + strSubjectAddressForEmail + '%20to%20me&body=<' + strBaseToUrl + strBodyAddressForEmail + '>">A Friend</a>';
+                var rowNode = table
+                    .row.add([address, fromUrl, toUrl, emailFromUrl,emailToUrl])
+                    .draw()
+                    .node();
+
+                var arrMyAddresses = table.column(0).data();
+                var strAddr = "";
+                for (var i = 0; i < arrMyAddresses.length; i++) {
+                    var check = arrMyAddresses.length - 1;
+                    //if (i == check) {
+                   //     strAddr = strAddr + arrMyAddresses[i];
+                  //  }
+                //    else {
+                        strAddr = strAddr + arrMyAddresses[i] + "~";
+                 //   };
+                };
+                localStorage.removeItem("addresses");
+                localStorage.addresses = strAddr;
+                
+                
+                $(rowNode)
+                    .css('color', 'red')
+                    .animate({ color: 'black' });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="adder">
+        <input id="theAddress" type="text" placeholder="Enter an address" /><button id="addAddress">Add Address</button><button id="clear">Clear Stored Addresses</button><br /><input id="emailAddress" type="email" placeholder="enter email"/><button id="email">Create Email Links</button>
+    </div>
+    <div id="addressTableContainer">
+        <table id="addressTable" class="pretty">
+            <thead>
+                <tr>
+                    <th>Address</th>
+                    <th>Link to me</th>
+                    <th>Link from me</th>
+                    <th>E-mail Someone From Link</th>
+                    <th>E-mail Someone to Link</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
