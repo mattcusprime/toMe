@@ -114,10 +114,66 @@
     </script>
 </head>
 <body>
-    <div id="adder">
-        <input id="theAddress" type="text" placeholder="Enter an address" /><button id="addAddress">Add Address</button><button id="clear">Clear Stored Addresses</button><br /><input id="emailAddress" type="email" placeholder="enter email"/><button id="email">Create Email Links</button>
+   <div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span>
+ <span class="icon-bar"></span>
+ <span class="icon-bar"></span>
+ <span class="icon-bar"></span>
+
+            </button> <a class="navbar-brand" href="#">MAP toMe</a>
+
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Add</a>
+
+                </li>
+                <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <span class="caret"></span></a>
+
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Log Out</a>
+
+                        </li>
+                        <li><a href="#">Settings</a>
+
+                        </li>
+                        <li><a href="#">Clear All Entries</a>
+
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
     </div>
-    <div id="addressTableContainer">
+</div>
+<div class="container">
+    <div class="form-group">
+        <input type="address" class="form-control input-lg" id="addAddress" placeholder="Enter address"></input>
+    </div>
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="form-group">
+                <input type="nickname" class="form-control input-lg" id="addNickname" placeholder="Enter nickname"></input>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <button type="button" class="btn btn-primary btn-lg btn-block">Add address</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-9">
+            <div class="form-group">
+                <input type="search" class="form-control input-lg" id="search" placeholder="Search saved addresses"></input>
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <button type="button" class="btn btn-warning btn-lg btn-block">Search</button>
+        </div>
+    </div>
         <table id="addressTable" class="pretty">
             <thead>
                 <tr>
@@ -132,6 +188,18 @@
 
             </tbody>
         </table>
+     <hr>
+    <div class="row">
+        <div class="col-xs-4">
+            <button type="button" class="btn btn-info btn-lg btn-block">Me to there</button>
+        </div>
+        <div class="col-xs-4">
+            <button type="button" class="btn btn-info btn-lg btn-block">There to there</button>
+        </div>
+        <div class="col-xs-4">
+            <button type="button" class="btn btn-info btn-lg btn-block">There to me</button>
+        </div>
     </div>
+</div>
 </body>
 </html>
